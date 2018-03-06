@@ -4,24 +4,21 @@ using namespace std;
 char foodDrop(char place);
 class Pokemon {
 private:
-	string species;
-	string food;
-	string abilities;
-	string type;
-	string type2;
+
 	int health;
 	int index;
-	
+	int hp;
+	int dexnum;
 public:
 	 void foodeat(char foodType);
-	 void initPokemon(int health, int index, string type, string type2);
+	 void initPokemon(int health, int index);
 	 void printinfo();
-
 
 };
 
 int main() {
 	char place;
+
 
 	cout << "Desert = d"<< endl;
 	cout << "Forest = f"<< endl;
@@ -35,16 +32,20 @@ int main() {
 	Pokemon pokemon2;
 	Pokemon pokemon3;
 	Pokemon pokemon4;
-	pokemon1.initPokemon(30, 7,"Water","" );
+	cout << "Here's Squirtle's health and pokedex number." << endl;
+	pokemon1.initPokemon(25, 7);
 	pokemon1.foodeat(food);
 	pokemon1.printinfo();
-	pokemon2.initPokemon(25, 387, "Grass", "");
+	cout << "Turtwig's:" << endl;
+	pokemon2.initPokemon(30, 387);
 	pokemon2.foodeat(food);
 	pokemon2.printinfo();
-	pokemon3.initPokemon(20, 4, "Fire", "");
+	cout << "Charmander:" << endl;
+	pokemon3.initPokemon(20, 4);
 	pokemon3.foodeat(food);
 	pokemon3.printinfo();
-	pokemon4.initPokemon(50, 446, "Normal", "");
+	cout << "Munchlax:" << endl;
+	pokemon4.initPokemon(50, 446);
 	pokemon4.foodeat(food);
 	pokemon4.printinfo();
 	system("Pause");
@@ -68,13 +69,14 @@ void Pokemon::foodeat(char foodType) {
 	
 }
 
-void Pokemon::initPokemon(int health, int index, string type, string type2) {
-
+void Pokemon::initPokemon(int health, int index) {
+	hp = health;
+	dexnum = index;
 
 }
 
 void Pokemon::printinfo() {
-	cout <<"Health:" << health << "  Dex #:" << index << "  Type:" << type << " " << type2 << "." << endl;
+	cout <<"Health:" << health << "  Dex #:" << index<<"." << endl;
 }
 char foodDrop(char place) {
 
