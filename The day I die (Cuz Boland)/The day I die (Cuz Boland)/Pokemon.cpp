@@ -18,65 +18,64 @@ public:
 
 int main() {
 	char place;
+	while (1) {
 
+		cout << "Desert = d" << endl;
+		cout << "Forest = f" << endl;
+		system("pause");
 
-	cout << "Desert = d"<< endl;
-	cout << "Forest = f"<< endl;
-	system("pause");
-
-	cout << "Where is your pokemon looking for food?" << endl;
-	cin >> place;
-	char food = foodDrop(place);
-	string species;
-	Pokemon pokemon1;
-	Pokemon pokemon2;
-	Pokemon pokemon3;
-	Pokemon pokemon4;
-	cout << "Here's Squirtle's health and pokedex number." << endl;
-	pokemon1.initPokemon(25, 7);
-	pokemon1.foodeat(food);
-	pokemon1.printinfo();
-	cout << "Turtwig's:" << endl;
-	pokemon2.initPokemon(30, 387);
-	pokemon2.foodeat(food);
-	pokemon2.printinfo();
-	cout << "Charmander:" << endl;
-	pokemon3.initPokemon(20, 4);
-	pokemon3.foodeat(food);
-	pokemon3.printinfo();
-	cout << "Munchlax:" << endl;
-	pokemon4.initPokemon(50, 446);
-	pokemon4.foodeat(food);
-	pokemon4.printinfo();
-	system("Pause");
-	//pokemon5.initPokemon("Squirtle", 25, 7, "Water", "Water");
-	//pokemon6.initPokemon("Squirtle", 25, 7, "Water", "Water");
-	//pokemon7.initPokemon("Squirtle", 25, 7, "Water", "Water");
-	//pokemon8.initPokemon("Squirtle", 25, 7, "Water", "Water");
-	//pokemon9.initPokemon("Squirtle", 25, 7, "Water", "Water");
-	//pokemon10.initPokemon("Squirtle", 25, 7, "Water", "Water");
+		cout << "Where is your pokemon looking for food?" << endl;
+		cin >> place;
+		char food = foodDrop(place);
+		string species;
+		Pokemon pokemon1;
+		Pokemon pokemon2;
+		Pokemon pokemon3;
+		Pokemon pokemon4;
+		cout << "Here's Squirtle's health and pokedex number." << endl;
+		pokemon1.initPokemon(25, 7);
+		pokemon1.foodeat(food);
+		cout << "After feeding:" << endl;
+		pokemon1.printinfo();
+		cout << "Turtwig's:" << endl;
+		pokemon2.initPokemon(30, 387);
+		pokemon2.foodeat(food);
+		cout << "After feeding:" << endl;
+		pokemon2.printinfo();
+		cout << "Charmander:" << endl;
+		pokemon3.initPokemon(20, 4);
+		pokemon3.foodeat(food);
+		cout << "After feeding:" << endl;
+		pokemon3.printinfo();
+		cout << "Munchlax:" << endl;
+		pokemon4.initPokemon(50, 446);
+		pokemon4.foodeat(food);
+		cout << "After feeding:" << endl;
+		pokemon4.printinfo();
+		system("Pause");
+	}
 }
 
 void Pokemon::foodeat(char foodType) {
 	if (foodType == 'm')
-		health += 3;
+		hp += 3;
 	else if (foodType == 'b')
-		health += 10;
+		hp += 10;
 	else if (foodType == 'f')
-		health += 5;
+		hp += 5;
 	else if (foodType == 'c')
-		health += 7;
+		hp += 7;
 	
 }
 
 void Pokemon::initPokemon(int health, int index) {
 	hp = health;
 	dexnum = index;
-
+	cout << "Health:" << health << "  Dex #:" << index << "." << endl;
 }
 
 void Pokemon::printinfo() {
-	cout <<"Health:" << health << "  Dex #:" << index<<"." << endl;
+	cout <<"Health:" << hp << "  Dex #:" << dexnum<<"." << endl;
 }
 char foodDrop(char place) {
 
@@ -85,20 +84,30 @@ char foodDrop(char place) {
 	//forest food drop chance
 	if (place == 'f') {
 		int map = rand() % 2 + 1;
-		if (map == 1)
+		if (map == 1) {
+			cout << "found a mushroom!";
 			return 'm';
-		else
+		}
+		else {
+			cout << "found a berry!";
 			return 'b';
+		}
 	}
 
 	//desert food drop chance
 	if (place == 'd') {
 		int map = rand() % 100 + 1;
-		if (map < 20)
+		if (map < 20) {
+			cout << "found a berry";
 			return 'b';
-		if (map < 60)
+		}
+		if (map < 60) {
 			return 'f';
-		else
+			cout << "found a fruit!" << endl;
+		}
+		else {
+			cout << "found cheese!" << endl;
 			return 'c';
+		}
 	}
 }
