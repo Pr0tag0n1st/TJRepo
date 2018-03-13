@@ -23,5 +23,5 @@ int main() {
 	cout << "In order, they are:" << endl;
 	for (iter = Victor.begin(); iter != Victor.end(); ++iter)
 		cout << *iter << endl;
-	
+	system("Pause");
 }
