@@ -19,7 +19,7 @@ int main() {
 	cout << "Here are your numbers:" << endl;
 	for (iter = Victor.begin(); iter != Victor.end(); ++iter)
 		cout << *iter << endl;
-	sort(Victor.begin(), Victor.end(), Victor);
+	sort(Victor.begin(), Victor.end());
 	cout << "In order, they are:" << endl;
 	for (iter = Victor.begin(); iter != Victor.end(); ++iter)
 		cout << *iter << endl;
