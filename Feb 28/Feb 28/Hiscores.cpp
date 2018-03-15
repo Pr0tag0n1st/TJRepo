@@ -20,11 +20,9 @@ int main() {
 			read >> n;
 			allscores[i] = n;
 
-
 		}
 
 		read.close();
-
 
 	}
 	cin >> newscore;
