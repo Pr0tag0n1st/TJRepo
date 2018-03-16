@@ -15,16 +15,14 @@ int main() {
 	ofstream writefile;
 	ifstream readfile;
 	cout << "How many test cases are there?" << endl;
-	cin >> temp;
-	writefile.open("Prob03.in");
-	writefile << temp << endl;
+
 	readfile.open("Prob03.in");
 	readfile >> T;
 	cout << "Now give me pairs of numbers to add and multiply." << endl;
 	for (int i = 0; i < T; i++) {
-		cin >> temp;
+		readfile >> temp;
 		num1.push_back(temp);
-		cin >> temp;
+		readfile >> temp;
 		num2.push_back(temp);
 	}
 	for (iter1 = num1.begin(); iter1 != num1.end(); iter1++) {
