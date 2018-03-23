@@ -63,12 +63,13 @@ int main() {
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
-			face1.drawFace;
-			face2.drawFace;
-			face3.drawFace;
-			face4.drawFace;
-			face5.drawFace;
-			face6.drawFace;
+			face1.drawFace();
+			face2.drawFace();
+			face3.drawFace();
+			face4.drawFace();
+			face5.drawFace();
+			face6.drawFace();
+			al_flip_display();
 		}
 	}
 
@@ -84,7 +85,7 @@ void FACE::initFace(int wid, int hig, int x, int y, int movex, int movey, ALLEGR
 	ALLEGRO_BITMAP*pic = sample;
 }
 void FACE::drawFace() {
-	al_draw_bitmap(pic, dx, dy, 0);
+	al_draw_bitmap(pic, xpos, ypos, 0);
 }
 
 void FACE::Movement() {
