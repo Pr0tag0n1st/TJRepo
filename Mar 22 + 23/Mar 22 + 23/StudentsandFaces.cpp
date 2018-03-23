@@ -83,6 +83,7 @@ int main() {
 			for (iter = faces.begin(); iter != faces.end(); iter++) {
 				iter->drawFace();
 			}
+			al_flip_display();
 		}
 	}
 
