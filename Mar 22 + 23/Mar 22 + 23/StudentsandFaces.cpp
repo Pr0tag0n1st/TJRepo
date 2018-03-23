@@ -2,15 +2,15 @@
 #include <vector>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
-
+using namespace std;
 class FACE {
 public:
-	void initFace(int wid, int hig, int x, int y, int movex, int movey, ALLEGRO_BITMAP*sample);
+	void initFace(int x, int y, int movex, int movey, ALLEGRO_BITMAP*sample);
 	void drawFace();
 	void Movement();
+	void printFace();
 private:
-	int width;
-	int height;
+
 	int xpos;
 	int ypos;
 	int dx;
@@ -18,15 +18,21 @@ private:
 	ALLEGRO_BITMAP*pic;
 };
 int main() {
+	vector<FACE> faces;
 	al_init();
 	al_init_image_addon();
 	ALLEGRO_DISPLAY*display = al_create_display(600, 400);
-	ALLEGRO_BITMAP*face = al_create_bitmap(50, 50);
-	al_set_target_bitmap(face);
-	al_clear_to_color(al_map_rgb(255, 255, 255));
+	cout << "flag1" << endl;
+	ALLEGRO_BITMAP*mario = al_load_bitmap("Mayo.png");
+	ALLEGRO_BITMAP*luigi = al_load_bitmap("Linguini.png");
+	ALLEGRO_BITMAP*link = al_load_bitmap("Stink.png");
+	ALLEGRO_BITMAP*samus = al_load_bitmap("Spamus.png");
+	ALLEGRO_BITMAP*falcon = al_load_bitmap("Hyes.png");
+	ALLEGRO_BITMAP*fox = al_load_bitmap("Toriyah.png");
 	ALLEGRO_TIMER*timer = al_create_timer(0.02);
 	ALLEGRO_EVENT_QUEUE*event_queue = al_create_event_queue();
 	bool redraw = true;
+	cout << "Flag2" << endl;
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_set_target_backbuffer(display);
@@ -37,22 +43,34 @@ int main() {
 	FACE face4;
 	FACE face5;
 	FACE face6;
-	face1.initFace(50, 50, 25, 75, 2, 2, face);
-	face2.initFace(50, 50, 75, 100, 2, 4, face);
-	face3.initFace(50, 50, 50, 50, 4, 2, face);
-	face4.initFace(50, 50, 100, 100, 4, 4, face);
-	face5.initFace(50, 50, 150, 150, 8, 8, face);
-	face6.initFace(50, 50, 200, 150, 2, 8, face);
+	cout << "Flag3" << endl;
+	face1.initFace(25, 75, 2, 2, mario);
+	face2.initFace(75, 100, 2, 4, luigi);
+	face3.initFace(50, 50, 4, 2, link);
+	face4.initFace(100, 100, 4, 4, samus);
+	face5.initFace(150, 150, 8, 8, falcon);
+	face6.initFace(200, 150, 2, 8, fox);
+	vector<FACE>::iterator iter;
+	faces.push_back(face1);
+	faces.push_back(face2);
+	faces.push_back(face3);
+	faces.push_back(face4);
+	faces.push_back(face5);
+	faces.push_back(face6);
+	cout << "flag4" << endl;
+	al_start_timer(timer);
 	while (1) {
+		cout << "flag4.5" << endl;
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
+		cout << "flag4.75" << endl;
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
-			face1.Movement();
-			face2.Movement();
-			face3.Movement();
-			face4.Movement();
-			face5.Movement();
-			face6.Movement();
+			cout << "flag5" << endl;
+			for (iter = faces.begin(); iter != faces.end(); iter++) {
+				iter->Movement();
+				iter->printFace();
+			}
+			cout << "flag6" << endl;
 			redraw = true;
 		}
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
@@ -60,24 +78,18 @@ int main() {
 		}
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
-
+			cout << "flag7" << endl;
 			al_clear_to_color(al_map_rgb(0, 0, 0));
-
-			face1.drawFace();
-			face2.drawFace();
-			face3.drawFace();
-			face4.drawFace();
-			face5.drawFace();
-			face6.drawFace();
-			al_flip_display();
+			for (iter = faces.begin(); iter != faces.end(); iter++) {
+				iter->drawFace();
+			}
 		}
 	}
 
 
 }
-void FACE::initFace(int wid, int hig, int x, int y, int movex, int movey, ALLEGRO_BITMAP*sample) {
-	width = wid;
-	height = hig;
+void FACE::initFace(int x, int y, int movex, int movey, ALLEGRO_BITMAP*sample) {
+
 	xpos = x;
 	ypos = y;
 	dx = movex;
@@ -87,12 +99,14 @@ void FACE::initFace(int wid, int hig, int x, int y, int movex, int movey, ALLEGR
 void FACE::drawFace() {
 	al_draw_bitmap(pic, xpos, ypos, 0);
 }
-
+void FACE::printFace() {
+	cout << "Face is at:" << xpos << ", " << ypos << ", going " << dx << ", " << dy << " units per frame." << endl;
+}
 void FACE::Movement() {
 	xpos += dx;
 	ypos += dy;
-	if (xpos < 0 || xpos + width > 600)
+	if (xpos < 0 || xpos > 600)
 		dx *= -1;
-	if (ypos < 0 || ypos + height > 400)
+	if (ypos < 0 || ypos > 400)
 		dy *= -1;
 }
