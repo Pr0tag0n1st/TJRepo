@@ -14,6 +14,8 @@ int main() {
 	bool doexit = false;
 	bool redraw = true;
 	bool nextslide = false;
+	int slot1 = rand() % 10;
+	int slot2 = rand() % 10;
 	string colors[10]{ "Head", "Shoulder", "Knee", "Toe", "Elbow", "Thumb", "Heel", "Wrist", "Shin", "Forearm"};
 	string body[10]{ "Red", "Green", "Blue", "Yellow", "Black", "White", "Orange", "Purple", "Pink", "Brown" };
 	srand(time(NULL));
@@ -60,7 +62,13 @@ int main() {
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
-			
+			if (nextslide = true) {
+				slot1 = rand() % 10;
+				slot2 = rand() % 10;
+			}
+			cout << slot1 << ", " << slot2 << endl;
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 400, 400, 0, "test");			al_draw_textf(font, al_map_rgb(255, 255, 255), 400, 400, 0, "test");
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 400, 500, 0, "test");
 		}
 		redraw = true;
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
