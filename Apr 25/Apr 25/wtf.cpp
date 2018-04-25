@@ -31,8 +31,8 @@ int main() {
 	int delay = 0;
 	int a = 0;
 	int b = 0;
-	int angle = 200;
-	int radius = 100;
+	int angle = 10;
+	int radius = 10;
 
 	float face1_x = SCREEN_W / 10;
 	float face1_y = SCREEN_H / 4;
@@ -101,8 +101,8 @@ int main() {
 			face3_x += a + cos(angle)*radius;
 			face3_y += b + sin(angle)*radius;
 			
-			if (delay % 1 == 0)
-				angle++;
+			if (delay % 5 == 0)
+				angle = angle+3;
 			delay++;
 
 
