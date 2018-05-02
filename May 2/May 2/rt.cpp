@@ -26,6 +26,9 @@ int main() {
 			cout << "Which religion?" << endl;
 			cin >> numinput;
 			religion(numinput);
+			break;
+		default:
+			cout << "Invalid command" << endl;
 		}
 	}
 	
