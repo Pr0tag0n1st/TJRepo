@@ -7,8 +7,8 @@
 #include<math.h>
 
 const float FPS = 60;
-const int SCREEN_W = 640;
-const int SCREEN_H = 480;
+const int SCREEN_W = 1080;
+const int SCREEN_H = 720;
 const int BOUNCER_SIZE = 32;
 
 int main() {
@@ -51,22 +51,22 @@ int main() {
 
 	//load all your stuff
 	display = al_create_display(SCREEN_W, SCREEN_H);
-	background = al_load_bitmap("WhatIsLove.jpg");
+//	background = al_load_bitmap("WhatIsLove.jpg");
 	al_reserve_samples(1);
 	Place = al_load_sample("DejaVu.wav");
-	face1 = al_load_bitmap("Face1.jpg");
+	face1 = al_create_bitmap(4, 4);
 
 	al_set_target_bitmap(face1);
-	al_convert_mask_to_alpha(face1, al_map_rgb(255, 255, 255));
+	al_clear_to_color(al_map_rgb(255, 0, 0));
 
-	face2 = al_load_bitmap("Face2.png");
+	face2 = al_create_bitmap(4, 4);
 	al_set_target_bitmap(face2);
-	al_convert_mask_to_alpha(face2, al_map_rgb(255, 255, 255));
+	al_clear_to_color(al_map_rgb(0, 255, 0));
 
 
-	face3 = al_load_bitmap("Face3.png");
+	face3 = al_create_bitmap(4, 4);
 	al_set_target_bitmap(face3);
-	al_convert_mask_to_alpha(face3, al_map_rgb(255, 255, 255));
+	al_clear_to_color(al_map_rgb(0, 0, 255));
 
 
 	//get your event queue ready to roll
@@ -94,15 +94,15 @@ int main() {
 		al_wait_for_event(event_queue, &ev);
 
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
-			face1_x += a + cos(angle)*radius;
-			face1_y -= b + sin(angle)*radius;
-			face2_x -= a + cos(angle)*radius;
-			face2_y += b + sin(angle)*radius;
+			face1_x += a + sin(angle*2)*(radius+5);
+			face1_y += b + sin(angle-10)*angle;
+			face2_x += a + cos(angle)*angle;
+			face2_y += b + cos(angle*face2_x)*angle;
 			face3_x += a + cos(angle)*radius;
-			face3_y += b + sin(angle)*radius;
+			face3_y += b + tan(angle)*(radius/5);
 			
 			if (delay % 5 == 0)
-				angle = angle+3;
+				angle = angle+1;
 			delay++;
 
 
@@ -115,11 +115,11 @@ int main() {
 		if (redraw && al_is_event_queue_empty(event_queue)) {
 			redraw = false;
 
-			al_clear_to_color(al_map_rgb(0, 0, 0));
+	//		al_clear_to_color(al_map_rgb(0, 0, 0));
 
 
-			al_draw_filled_circle(50, 50, 50, al_map_rgb(200, 100, 100));
-			al_draw_bitmap(background, 0, 0, 0);
+	//		al_draw_filled_circle(50, 50, 50, al_map_rgb(200, 100, 100));
+	//		al_draw_bitmap(background, 0, 0, 0);
 			al_draw_bitmap(face1, face1_x, face1_y, 0);
 			al_draw_bitmap(face2, face2_x, face2_y, 0);
 			al_draw_bitmap(face3, face3_x, face3_y, 0);
