@@ -36,10 +36,10 @@ int main() {
 
 //Prints out instructions again
 void print_menu() {
-	cout << "Quit: q" << endl;
-	cout << "Help: h" << endl;
-	cout << "Info about a religion: r" << endl;
-	cout << "Temperature conversion: t" << endl;
+	cout << "quit: q" << endl;
+	cout << "help: h" << endl;
+	cout << "info about a religion: r" << endl;
+	cout << "temperature conversion: t" << endl;
 	
 }
 
