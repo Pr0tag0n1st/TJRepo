@@ -9,7 +9,6 @@ void clear(int map[10][10]);
 const int FPS = 50;
 void GemFall(int map[10][10]);
 void MapFill(int map[10][10]);
-//void GemSwap(int map[10][10], bool selected, int GemSlotX, int GemSlotY);
 
 int main() {
 	cout << "flag1" << endl;
@@ -34,10 +33,15 @@ int main() {
 	int cursor_y;
 	int boxX;
 	int boxY;
+	int box2X;
+	int box2Y;
 	int snapX;
 	int snapY;
-
+	int snap2X;
+	int snap2Y;
 	bool clicked = false;
+	bool clicked2 = false;
+	int temp;
 
 	al_convert_mask_to_alpha(Emerald, al_map_rgb(255, 255, 255));
 	al_convert_mask_to_alpha(Diamond, al_map_rgb(0, 0, 0));
@@ -93,6 +97,22 @@ int main() {
 			boxX -= snapX;
 			boxY -= snapY;
 			
+			if (clicked == true && cursor_x > boxX - Size && cursor_x < boxX + (2 * Size) && cursor_y > boxX - Size && cursor_y < boxX + (2 * Size)) {
+				clicked2 = true;
+				box2X = cursor_x;
+				box2Y = cursor_y;
+				snap2X = box2X % 60;
+				snap2Y = box2Y % 60;
+				box2X -= snap2X;
+				box2Y -= snap2Y;
+				clicked2 = false;
+				temp = Map[box2X / 60][box2Y / 60];
+				Map[box2X / 60][box2Y / 60] = Map[boxX / 60][boxY / 60];
+				Map[boxX / 60][boxY / 60] = temp;
+				clicked2 = false;
+				clicked = false;
+			}
+
 				}
 			
 		else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) {
