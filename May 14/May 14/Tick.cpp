@@ -175,7 +175,7 @@ int main() {
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			Doexit = true;
 		}
-		if (Redraw && al_is_event_queue_empty(event_queue)) {
+		else if (Redraw && al_is_event_queue_empty(event_queue)) {
 			Redraw = false;
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			cout << "flag3" << endl;
