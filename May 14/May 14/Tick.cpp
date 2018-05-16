@@ -10,13 +10,16 @@ int main() {
 	al_init_primitives_addon();
 	al_install_keyboard();
 	int size = 200;
-	bool clicked = false;
-	int turnorder = 1;
-	ALLEGRO_DISPLAY*display = al_create_display(630, 700);
+	bool player1 = true;
+	bool player2 = false;
+	ALLEGRO_DISPLAY*display = al_create_display(610, 700);
 	ALLEGRO_BITMAP*X = al_load_bitmap("tictactoeX.png");
 	ALLEGRO_BITMAP*O = al_load_bitmap("tictactoeO.png");
 	ALLEGRO_FONT*font = al_create_builtin_font();
-	ALLEGRO_EVENT_QUEUE*event_queue = al_create_event_queue();
+	ALLEGRO_TIMER *timer = al_create_timer(1/60);
+	if (timer == NULL) cout << "timer is dumb.";
+
+
 	int Grid[3][3];
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
@@ -24,177 +27,254 @@ int main() {
 		}
 	}
 	bool Redraw = true;
-	bool Doexit = false;
+	bool Doexit = false;	
+	ALLEGRO_EVENT_QUEUE*event_queue = al_create_event_queue();
 	al_set_target_bitmap(al_get_backbuffer(display));
 	al_register_event_source(event_queue, al_get_display_event_source(display));
+
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
+
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_clear_to_color(al_map_rgb(0, 0, 0));
-	al_flip_display();
-	cout << "flag2" << endl;
 
+	
+	
+	//al_draw_filled_rectangle(50, 150, 200, 200, al_map_rgb(160, 60, 60));
+	al_flip_display();
+	//al_rest(2);
+	//cout << "flag2" << endl;
+
+	
+	al_start_timer(timer);
 	while (!Doexit) {
+		//cout << "game loop started" << endl;
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
+		//cout << "checking for timer event" << endl;
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			Redraw = true;
-		}
+			cout << "timer section" << endl;
+
+		
+			cout << "Redraw is " << Redraw;
+		}//end timer section
+
 		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+			cout << "key pressed";
 			switch (ev.keyboard.keycode) {
 			case ALLEGRO_KEY_PAD_1:
-				
-				if (turnorder == 1 && Grid[2][0] == 0) {
+
+				if (player1 == true && Grid[2][0] == 0) {
 					Grid[2][0] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[2][0] == 0) {
+
+				else if (player2 == true && Grid[2][0] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[2][0] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[2][0] != 0) {
+
+				else if (Grid[2][0] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_2:
 
-				if (turnorder == 1 && Grid[2][1] == 0) {
+				if (player1 == true && Grid[2][1] == 0) {
 					Grid[2][1] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 &&Grid[2][1] == 0) {
+				else if (player2 == true && Grid[2][1] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[2][1] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[2][1] != 0) {
+				else if (Grid[2][1] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_3:
 
-				if (turnorder == 1 && Grid[2][2] == 0) {
+				if (player1 == true && Grid[2][2] == 0) {
 					Grid[2][2] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[2][2] == 0) {
+				else if (player2 == true && Grid[2][2] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[2][2] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[2][2] != 0) {
+				else if (Grid[2][2] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_4:
-				if (turnorder == 1 && Grid[1][0] == 0) {
+
+				if (player1 == true && Grid[1][0] == 0) {
 					Grid[1][0] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[1][0] == 0) {
+				else if (player2 == true && Grid[1][0] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[1][0] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[1][0] != 0) {
+				else if (Grid[1][0] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_5:
-				if (turnorder == 1 && Grid[1][1] == 0) {
+
+				if (player1 == true && Grid[1][1] == 0) {
 					Grid[1][1] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[1][1] == 0) {
+				else if (player2 == true && Grid[1][1] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[1][1] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[1][1] != 0) {
+				else if (Grid[1][1] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_6:
-				if (turnorder == 1 && Grid[1][2] == 0) {
+
+				if (player1 == true && Grid[1][2] == 0) {
 					Grid[1][2] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[1][2] == 0) {
+				else if (player2 == true && Grid[1][2] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[1][2] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[1][2] != 0) {
+				else if (Grid[1][2] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_7:
-				if (turnorder == 1 && Grid[0][0] == 0) {
+
+				if (player1 == true && Grid[0][0] == 0) {
 					Grid[0][0] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[0][0] == 0) {
+				else if (player2 == true && Grid[0][0] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[0][0] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[0][0] != 0) {
+				else if (Grid[0][0] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_8:
-				if (turnorder == 1 && Grid[0][1] == 0) {
+
+				if (player1 == true && Grid[0][1] == 0) {
 					Grid[0][1] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[0][1] == 0) {
+				else if (player2 == true && Grid[0][1] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[0][1] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[0][1] != 0) {
+				else if (Grid[0][1] != 0) {
 					cout << "Can't do that" << endl;
 				}
+				break;
+
 			case ALLEGRO_KEY_PAD_9:
-				if (turnorder == 1 && Grid[0][2] == 0) {
+
+				if (player1 == true && Grid[0][2] == 0) {
 					Grid[0][2] = 1;
 					cout << "Placed an X" << endl;
-					turnorder = 2;
+					player1 = false;
+					player2 = true;
 				}
-				if (turnorder == 2 && Grid[0][2] == 0) {
+				else if (player2 == true && Grid[0][2] == 0) {
 					cout << "Placed an O" << endl;
 					Grid[0][2] = 2;
-					turnorder = 1;
+					player1 = true;
+					player2 = false;
 				}
-				if (Grid[0][2] != 0) {
+				else if (Grid[0][2] != 0) {
 					cout << "Can't do that" << endl;
 				}
+
+				break;
+
+			case ALLEGRO_KEY_ESCAPE:
+				Doexit = true;
+
+			}
+		}
+
+	
+		else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
+			cout << "key released" << endl;
+			switch (ev.keyboard.keycode) {
+		
 			}
 		}
 	
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			cout << "window closed";
 			Doexit = true;
 		}
-		else if (Redraw && al_is_event_queue_empty(event_queue)) {
+
+		if (Redraw && al_is_event_queue_empty(event_queue)) {
 			Redraw = false;
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 			cout << "flag3" << endl;
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
 				
-						al_draw_rectangle(i * size+10 , j * size + 10 , i * size + size, j * size + size, al_map_rgb(255, 255, 255), 5);
+						al_draw_rectangle(i * size+5 , j * size + 5 , i * size + size, j * size + size, al_map_rgb(255, 255, 255), 5);
 					if (Grid[i][j] == 1) {
-						al_draw_bitmap(X, i*size+10, j*size+10, 0);
+						al_draw_bitmap(X, i*size+5, j*size+5, 0);
 					}
 					else if (Grid[i][j] == 2) {
-						al_draw_bitmap(O, i*size+10, j*size+10, 0);
+						al_draw_bitmap(O, i*size+5, j*size+5, 0);
 					}
 					
 				}
 			}
 			al_flip_display();
 		}
-	}
+	}//end game loop
 	al_destroy_bitmap(X);
 	al_destroy_bitmap(O);
 	al_destroy_display(display);
