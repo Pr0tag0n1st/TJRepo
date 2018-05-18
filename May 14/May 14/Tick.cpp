@@ -32,7 +32,7 @@ int main() {
 	}
 	bool Redraw = true;
 	bool Doexit = false;	
-	//al_set_target_bitmap(al_get_backbuffer(display));
+	al_set_target_bitmap(al_get_backbuffer(display));
 
 	ALLEGRO_EVENT_QUEUE*event_queue = al_create_event_queue();
 	if (event_queue == NULL)cout << "event queue is NULL" << endl;
@@ -338,7 +338,7 @@ int main() {
 			Doexit = true;
 		}
 
-		if (Redraw == true/* && al_is_event_queue_empty(event_queue)*/) {
+		if (Redraw == true && al_is_event_queue_empty(event_queue)) {
 			//cout << "Reached Render" << endl;
 			Redraw = false;
 			al_clear_to_color(al_map_rgb(0, 0, 0));
