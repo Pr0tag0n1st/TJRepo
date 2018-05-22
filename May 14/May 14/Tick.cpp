@@ -64,169 +64,191 @@ int main() {
 			Redraw = true;
 			//cout << "timer section. Redraw is " <<Redraw<< endl;
 			if (key[0] == true) {
-				if (player1 == true && Grid[2][0] == 0) {
-					Grid[2][0] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
+				if (Grid[0][2] == 0) {
+					if (player1 == true) {
+						cout << "Placed an X" << endl;
+						Grid[0][2] = 1;
+						cout << "Changed value" << endl;
+						player1 = false;
+						player2 = true;
+						cout << "Player2's turn" << endl;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[0][2] = 2;
+						player1 = true;
+						player2 = false;
+					}
 				}
 
-				else if (player2 == true && Grid[2][0] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[2][0] = 2;
-					player1 = true;
-					player2 = false;
-				}
-
-				else if (Grid[2][0] != 0) {
+				else if (Grid[0][2] != 0) {
 					cout << "Can't do that" << endl;
 				}
 			}
 
 			if (key[1] == true) {
-				if (player1 == true && Grid[2][1] == 0) {
-					Grid[2][1] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[2][1] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[2][1] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[2][1] != 0) {
-					cout << "Can't do that" << endl;
+				if (Grid[1][2] == 0) {
+					if (player1 == true) {
+						Grid[1][2] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						Grid[1][2] = 2;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (Grid[2][1] != 0) {
+						cout << "Can't do that" << endl;
+					}
+
 				}
 			}
 
 			if (key[2] == true) {
-				if (player1 == true && Grid[2][2] == 0) {
-					Grid[2][2] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[2][2] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[2][2] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[2][2] != 0) {
-					cout << "Can't do that" << endl;
+				if (Grid[2][2] == 0) {
+					if (player1 == true) {
+
+						Grid[2][2] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[2][2] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[2][0] != 0) {
+						cout << "Can't do that" << endl;
+					}
 				}
 			}
 
 			if (key[3] == true) {
-				if (player1 == true && Grid[1][0] == 0) {
-					Grid[1][0] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[1][0] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[1][0] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[1][0] != 0) {
-					cout << "Can't do that" << endl;
+				if (Grid[0][1] == 0) {
+					if (player1 == true) {
+						Grid[0][1] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[0][1] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[0][1] != 0) {
+						cout << "Can't do that" << endl;
+					}
 				}
 			}
-
 			if (key[4] == true) {
-				if (player1 == true && Grid[1][1] == 0) {
-					Grid[1][1] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[1][1] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[1][1] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[1][1] != 0) {
-					cout << "Can't do that" << endl;
+				if (Grid[1][1] == 0) {
+					if (player1 == true) {
+
+						Grid[1][1] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[1][1] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[1][1] != 0) {
+						cout << "Can't do that" << endl;
+					}
 				}
 			}
 
 			if (key[5] == true) {
-				if (player1 == true && Grid[1][2] == 0) {
-					Grid[1][2] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[1][2] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[1][2] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[1][2] != 0) {
-					cout << "Can't do that" << endl;
+				if (Grid[2][1] == 0) {
+					if (player1 == true) {
+						Grid[2][1] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[2][1] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[2][1] != 0) {
+						cout << "Can't do that" << endl;
+					}
 				}
 			}
 
 			if (key[6] == true) {
-				if (player1 == true && Grid[0][0] == 0) {
-					Grid[0][0] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[0][0] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[0][0] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[0][0] != 0) {
-					cout << "Can't do that" << endl;
+				if (Grid[0][0] == 0) {
+					if (player1 == true) {
+						Grid[0][0] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[0][0] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[0][0] != 0) {
+						cout << "Can't do that" << endl;
+					}
 				}
 			}
 
 			if (key[7] == true) {
-				if (player1 == true && Grid[0][1] == 0) {
-					Grid[0][1] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[0][1] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[0][1] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[0][1] != 0) {
-					cout << "Can't do that" << endl;
-				}
-			}
+				if (Grid[1][0] == 0) {
+					if (player1 == true) {
 
-			if (key[8] == true) {
-				if (player1 == true && Grid[0][2] == 0) {
-					Grid[0][2] = 1;
-					cout << "Placed an X" << endl;
-					player1 = false;
-					player2 = true;
-				}
-				else if (player2 == true && Grid[0][2] == 0) {
-					cout << "Placed an O" << endl;
-					Grid[0][2] = 2;
-					player1 = true;
-					player2 = false;
-				}
-				else if (Grid[0][2] != 0) {
-					cout << "Can't do that" << endl;
+						Grid[1][0] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[1][0] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[1][0] != 0) {
+						cout << "Can't do that" << endl;
+					}
 				}
 			}
-		
+			if (key[8] == true) {
+				if (Grid[2][0] == 0) {
+					if (player1 == true) {
+
+						Grid[2][0] = 1;
+						cout << "Placed an X" << endl;
+						player1 = false;
+						player2 = true;
+					}
+					else if (player2 == true) {
+						cout << "Placed an O" << endl;
+						Grid[2][0] = 2;
+						player1 = true;
+						player2 = false;
+					}
+					else if (Grid[2][0] != 0) {
+						cout << "Can't do that" << endl;
+					}
+				}
+			}
 		}//end timer section
 
 		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
