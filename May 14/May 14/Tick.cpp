@@ -52,9 +52,7 @@ int main() {
 	
 	al_start_timer(timer);
 
-	al_draw_filled_rectangle(50, 50, 200, 200, al_map_rgb(50, 100, 200));
 	al_flip_display();
-	al_rest(3);
 
 
 	while (!Doexit) {
@@ -357,7 +355,6 @@ int main() {
 				}
 			}
 
-			al_draw_filled_rectangle(300, 300, 500, 500, al_map_rgb(70, 100, 300));
 			al_flip_display();
 		}
 	}//end game loop
