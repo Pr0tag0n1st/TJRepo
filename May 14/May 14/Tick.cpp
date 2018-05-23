@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 const float FPS = 60;
+
 int main() {
 	cout << "flag1" << endl;
 	al_init();
@@ -13,13 +14,17 @@ int main() {
 	al_init_primitives_addon();
 	al_install_keyboard();
 	int size = 200;
+	int xscore = 0;
+	int oscore = 0;
+	int tiescore = 0;
 	bool player1 = true;
 	bool player2 = false;
 	ALLEGRO_DISPLAY*display = al_create_display(610, 700);
 	ALLEGRO_BITMAP*X = al_load_bitmap("tictactoeX.png");
 	ALLEGRO_BITMAP*O = al_load_bitmap("tictactoeO.png");
 //	ALLEGRO_FONT*font = al_create_builtin_font();
-	ALLEGRO_TIMER *timer = al_create_timer(.02);
+	ALLEGRO_TIMER *timer = al_create_timer(1.0/60);
+	ALLEGRO_BITMAP*dino = al_load_bitmap("DinoStudios.jpg");
 	if (timer == NULL) cout << "timer is dumb.";
 
 	bool key[9] = { false, false, false, false, false, false, false, false, false };//ADDED BY MO, EXPAND AND USE IN TIMER SECTION
@@ -44,9 +49,16 @@ int main() {
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	
-	//al_draw_filled_rectangle(50, 150, 200, 200, al_map_rgb(160, 60, 60));
+
+	al_draw_bitmap(dino, 0, 0, 0);
 	al_flip_display();
-//	al_rest(2);
+	al_rest(2);
+
+	for (int i = 255; i > 0; i -= 5) {
+		al_draw_tinted_bitmap(dino, al_map_rgb(i, i, i), 0, 0, 0);
+		al_rest(0.05);
+		al_flip_display();
+	}
 	//cout << "flag2" << endl;
 
 	
@@ -97,8 +109,8 @@ int main() {
 					else if (player2 == true) {
 						Grid[1][2] = 2;
 						cout << "Placed an X" << endl;
-						player1 = false;
-						player2 = true;
+						player1 = true;
+						player2 = false;
 					}
 					else if (Grid[2][1] != 0) {
 						cout << "Can't do that" << endl;
@@ -366,7 +378,7 @@ int main() {
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
 				
-						al_draw_rectangle(i * size+5 , j * size + 5 , i * size + size, j * size + size, al_map_rgb(255, 255, 255), 5);
+						al_draw_rectangle(i * size+10 , j * size + 10 , i * size + size, j * size + size, al_map_rgb(255, 255, 255), 10);
 					if (Grid[i][j] == 1) {
 						al_draw_bitmap(X, i*size+5, j*size+5, 0);
 					}
@@ -386,3 +398,4 @@ int main() {
 	al_destroy_event_queue(event_queue);
 	return 0;
 }
+
