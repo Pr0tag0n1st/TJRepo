@@ -1,16 +1,18 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
-//#include <allegro5/allegro_font.h>
-//#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include <iostream>
 using namespace std;
 const float FPS = 60;
-
+int clear(int map[3][3]);
 int main() {
 	cout << "flag1" << endl;
 	al_init();
 	al_init_image_addon();
+	al_init_font_addon();
+	al_init_ttf_addon();
 	al_init_primitives_addon();
 	al_install_keyboard();
 	int size = 200;
@@ -22,7 +24,7 @@ int main() {
 	ALLEGRO_DISPLAY*display = al_create_display(610, 700);
 	ALLEGRO_BITMAP*X = al_load_bitmap("tictactoeX.png");
 	ALLEGRO_BITMAP*O = al_load_bitmap("tictactoeO.png");
-//	ALLEGRO_FONT*font = al_create_builtin_font();
+	ALLEGRO_FONT*font = al_load_font("Diner.ttf", 48, 0);
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/60);
 	ALLEGRO_BITMAP*dino = al_load_bitmap("DinoStudios.jpg");
 	if (timer == NULL) cout << "timer is dumb.";
@@ -76,8 +78,12 @@ int main() {
 			Redraw = true;
 			//cout << "timer section. Redraw is " <<Redraw<< endl;
 			if (key[0] == true) {
+				key[0] = false;
+
 				if (Grid[0][2] == 0) {
 					if (player1 == true) {
+
+
 						cout << "Placed an X" << endl;
 						Grid[0][2] = 1;
 						cout << "Changed value" << endl;
@@ -99,8 +105,11 @@ int main() {
 			}
 
 			if (key[1] == true) {
+				key[1] = false;
+
 				if (Grid[1][2] == 0) {
 					if (player1 == true) {
+
 						Grid[1][2] = 1;
 						cout << "Placed an X" << endl;
 						player1 = false;
@@ -120,6 +129,8 @@ int main() {
 			}
 
 			if (key[2] == true) {
+				key[2] = false;
+
 				if (Grid[2][2] == 0) {
 					if (player1 == true) {
 
@@ -141,6 +152,7 @@ int main() {
 			}
 
 			if (key[3] == true) {
+				key[3] = false;
 				if (Grid[0][1] == 0) {
 					if (player1 == true) {
 						Grid[0][1] = 1;
@@ -160,6 +172,8 @@ int main() {
 				}
 			}
 			if (key[4] == true) {
+				key[4] = false;
+
 				if (Grid[1][1] == 0) {
 					if (player1 == true) {
 
@@ -182,6 +196,8 @@ int main() {
 			}
 
 			if (key[5] == true) {
+				key[5] = false;
+
 				if (Grid[2][1] == 0) {
 					if (player1 == true) {
 						Grid[2][1] = 1;
@@ -202,6 +218,8 @@ int main() {
 			}
 
 			if (key[6] == true) {
+				key[6] = false;
+
 				if (Grid[0][0] == 0) {
 					if (player1 == true) {
 						Grid[0][0] = 1;
@@ -222,6 +240,8 @@ int main() {
 			}
 
 			if (key[7] == true) {
+				key[7] = false;
+
 				if (Grid[1][0] == 0) {
 					if (player1 == true) {
 
@@ -242,6 +262,8 @@ int main() {
 				}
 			}
 			if (key[8] == true) {
+				key[8] = false;
+
 				if (Grid[2][0] == 0) {
 					if (player1 == true) {
 
@@ -261,6 +283,33 @@ int main() {
 					}
 				}
 			}
+			if (clear(Grid) == 1) {
+				xscore += 1;
+				for (int i = 0; i < 3; i++) {
+					for (int j = 0; j < 3; j++) {
+						Grid[i][j] = 0;
+						
+					}
+				}
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+				al_draw_textf(font, al_map_rgb(255, 255, 255), 300, 450, 0, "Player 1 wins!");
+				al_flip_display();
+				al_rest(3.0);
+			}
+			else if (clear(Grid) == 2){
+				oscore += 1; 
+				for (int i = 0; i < 3; i++) {
+					for (int j = 0; j < 3; j++) {
+						Grid[i][j] = 0;
+					}
+				}
+				al_clear_to_color(al_map_rgb(0, 0, 0));
+				al_draw_textf(font, al_map_rgb(255, 255, 255), 300, 450, 0, "Player 2 wins!");
+				al_flip_display();
+				al_rest(3.0);
+				}
+				
+
 		}//end timer section
 
 		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
@@ -273,17 +322,16 @@ int main() {
 
 			case ALLEGRO_KEY_PAD_1:
 				key[0] = true;
-				
+
 				break;
 
 			case ALLEGRO_KEY_PAD_2:
 				key[1] = true;
-
 				break;
 
 			case ALLEGRO_KEY_PAD_3:
 				key[2] = true;
-	
+
 				break;
 
 			case ALLEGRO_KEY_PAD_4:
@@ -374,6 +422,9 @@ int main() {
 			//cout << "Reached Render" << endl;
 			Redraw = false;
 			al_clear_to_color(al_map_rgb(0, 0, 0));
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 50, 700, 0, "X:%d", xscore);
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 550, 700, 0, "O:%d", oscore);
+			al_draw_textf(font, al_map_rgb(255, 255, 255), 300, 700, 0, "Draw:%d", tiescore);
 			//cout << "flag3" << endl;
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
@@ -399,3 +450,49 @@ int main() {
 	return 0;
 }
 
+int clear(int map[3][3]) {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (map[i][j] != 0) {
+				if (map[i][j] == map[i + 1][j] &&
+					map[i][j] == map[i + 2][j] ||
+					map[i][j] == map[i][j + 1] &&
+					map[i][j] == map[i][j + 2] ||
+					map[i][j] == map[i + 1][j + 1] &&
+					map[i][j] == map[i + 2][j + 2] ||
+					map[i][j] == map[i][j - 1] &&
+					map[i][j] == map[i][j - 2]
+					) {
+					cout << "Someone wins!" << endl;
+					if (map[i][j] == 1) {
+						cout << "Player1!" << endl;
+						return 1;
+			
+					}
+					else if (map[i][j] == 2) {
+						cout << "Player2!" << endl;
+						return 2;
+						
+					}
+
+
+
+				}
+				//else if (map[i][j] != map[i + 1][j] &&
+				//	map[i][j] != map[i + 2][j] ||
+				//	map[i][j] != map[i][j + 1] &&
+				//	map[i][j] != map[i][j + 2] ||
+				//	map[i][j] != map[i + 1][j + 1] &&
+				//	map[i][j] != map[i + 2][j + 2] ||
+				//	map[i][j] != map[i][j - 1] &&
+				//	map[i][j] != map[i][j - 2]){
+				//	cout << "Nobody wins!" << endl;
+				//	for (int i = 0; i < 3; i++) {
+				//		for (int j = 0; j < 3; j++) {
+				//			map[i][j] = 0;
+				//		}
+				//	}
+				}
+			}
+		}
+	}
